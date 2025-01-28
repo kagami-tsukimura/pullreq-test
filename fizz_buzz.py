@@ -8,7 +8,9 @@ def fizzbuzz(n):
     elif n % 5 == 0:
         print("buzz")
     else:
-        print(n)
+        # 意図的に、testでエラーを起こす
+        # print(n)
+        print(n + 1)
 
 
 if __name__ == "__main__":
