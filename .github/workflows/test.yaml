@@ -25,18 +25,3 @@ jobs:
 
       - name: Run pytest
         run: pytest -v
-
-  add_comment:
-    if: failure() # test ジョブが失敗した場合にのみ実行
-    needs: test # test ジョブに依存
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Add comment to the pull request if tests fail
-        run: |
-          PR_NUMBER=${{ github.event.pull_request.number }}
-          COMMENT="⚠️ テストが失敗しています。エラーを解決してからマージしてください。"
-          curl -X POST \
-               -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-               -d "{\"body\": \"$COMMENT\"}" \
-               "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
